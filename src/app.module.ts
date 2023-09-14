@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Module, HttpModule, HttpService } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import {HttpModule, HttpService} from '@nestjs/axios';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
+import { firstValueFrom } from 'rxjs';
 
 const API_KEY = '123456';
 const API_KEY_Prod = 'PROD123456';
@@ -19,9 +21,10 @@ const API_KEY_Prod = 'PROD123456';
     {
       provide: 'TASKS',
       useFactory: async (http: HttpService) => {
-        const tasks = await http
-          .get('https://jsonplaceholder.typicode.com/todos')
-          .toPromise();
+        // const request = await http.get('https://jsonplaceholder.typicode.com/todos');
+          // .get('https://jsonplaceholder.typicode.com/todos')
+          // .toPromise();
+          const tasks = await firstValueFrom(http.get('https://jsonplaceholder.typicode.com/todos'));
         return tasks.data;
       },
       inject: [HttpService],
