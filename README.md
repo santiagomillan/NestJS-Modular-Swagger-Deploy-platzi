@@ -71,3 +71,19 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+crear servicios 
+nest g s users/services/users --flat
+nest g s {ruta} --flat
+
+
+crear controlador
+nest g co controllers/categories --flat
+nest g co {ruta} --flat
+
+crear módulos
+nest g resource ruta-del-módulo
+
+juagr con ambientes 
+NODE_ENV=prod npm run start:dev
